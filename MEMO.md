@@ -151,3 +151,51 @@ bash-4.2# ./HelloWorld
 ktファイルからjarを手軽に作りたい
 
 qurkusで`./gradlew quarkusDev`して作ったjarをnative-imageコマンドでバイナリ化してあげれば動きそうな雰囲気
+
+
+# GradleでKotlinをGraalVM上で動かす
+- javaが動くことが前提として必要
+```sh
+bash-4.2# /usr/bin/java -version
+```
+## Gradleをバイナリで取ってくる
+```sh
+bash4.2# wget https://services.gradle.org/distributions/gradle-6.2-bin.zip --no-check-certificate
+```
+
+## unzipする
+```sh
+# unzipのインストールはなければ行う
+bash-4.2# yum install -y unzip
+
+# 解凍
+bash-4.2# unzip gradle-6.2-bin.zip
+# => gradle-6.2ができる
+
+bash-4.2# gradle-6.2/bin/gradle --version
+
+# => Kotlin 1.3.61に対応している模様
+
+# Welcome to Gradle 6.2!
+# 
+# Here are the highlights of this release:
+#  - Dependency checksum and signature verification
+#  - Documentation links in deprecation messages
+#  - Shareable read-only dependency cache
+# 
+# For more details see https://docs.gradle.org/6.2/release-notes.html
+# 
+# 
+# ------------------------------------------------------------
+# Gradle 6.2
+# ------------------------------------------------------------
+# 
+# Build time:   2020-02-17 08:32:01 UTC
+# Revision:     61d3320259a1a0d31519bf208eb13741679a742f
+# 
+# Kotlin:       1.3.61
+# Groovy:       2.5.8
+# Ant:          Apache Ant(TM) version 1.10.7 compiled on September 1 # 2019
+# JVM:          1.8.0_242 (Oracle Corporation 25.242-b06-jvmci-20.# 0-b02)
+# OS:           Linux 4.9.184-linuxkit amd64
+```
