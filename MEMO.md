@@ -59,7 +59,7 @@ bash-4.2# gu install native-image
 
 このあと、`native-image`コマンドでclassファイルがjarファイルを元にnativeイメージを作りたいが...
 
-## （多分)Kotlinのファイルからjarを作るにはKotlinのコンパイラが必要なのでコンパイラをインストールする
+## (多分) Kotlinのファイルからjarを作るにはKotlinのコンパイラが必要なのでコンパイラをインストールする
 
 ```sh
 # wgetする 
@@ -199,3 +199,11 @@ bash-4.2# gradle-6.2/bin/gradle --version
 # JVM:          1.8.0_242 (Oracle Corporation 25.242-b06-jvmci-20.# 0-b02)
 # OS:           Linux 4.9.184-linuxkit amd64
 ```
+
+### TODO
+- GraalVMのDockerfile作成
+  - GraalVMのコンテナを立てる
+  - yumでwgetを入れて、wgetでGradleをコンテナ内にバイナリで取ってくる
+  - ネイティブイメージを作るために`native-image`コマンドをインストールする
+  - [Gradleプロジェクトを作る](https://qiita.com/yoshi10321/items/07e77cdd974abe50e770#gradle%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)
+  
