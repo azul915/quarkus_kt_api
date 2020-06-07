@@ -200,10 +200,37 @@ bash-4.2# gradle-6.2/bin/gradle --version
 # OS:           Linux 4.9.184-linuxkit amd64
 ```
 
-### TODO
-- GraalVMのDockerfile作成
-  - GraalVMのコンテナを立てる
-  - yumでwgetを入れて、wgetでGradleをコンテナ内にバイナリで取ってくる
-  - ネイティブイメージを作るために`native-image`コマンドをインストールする
-  - [Gradleプロジェクトを作る](https://qiita.com/yoshi10321/items/07e77cdd974abe50e770#gradle%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88%E3%81%AE%E4%BD%9C%E6%88%90)
-  
+# ネイティブコンパイル
+## GraalVMを使ってネイティブバイナリを作成する
+* ローカルにGraalVMが入っていれば、その環境を使いバイナリをビルドすることもできるが、Dockerでビルドする
+* Dockerでビルドする場合は、`--docker-build`オプションを指定してビルドする（Dockerがインストールされていること）
+* ネイティブコンパイルされたバイナリは、build配下に`quarku-1.0.0-SNAPSHOT-runner`のように拡張子なしで作られる
+## ネイティブバイナリの実行
+* src/main/docker/Dockerfile.native を使用して、コンテナでバイナリを実行する
+* イメージを作成する
+```shell script
+docker build -f src/main/docker/Dockerfile.native -t quarkus/quarkus-kt-api .
+```
+* コンテナを起動する
+```shell script
+docker run --rm -p 8080:8080 quarkus/quarkus_kt_api
+```
+* docker-composeで起動する
+```yaml
+# docker-compose.yml
+version: '3.4'
+services:
+  api:
+    build: 
+      context: .
+      dockerfile: ./src/main/docker/Dockerfile.native
+    ports:
+    - 8080:8080
+    container_name: kt_api_native
+```
+```shell script
+# execute
+$ docker-compose up
+```
+# ローカルで開発する
+* intelliJの内蔵実行環境でGradle実行した方が良さそう...
